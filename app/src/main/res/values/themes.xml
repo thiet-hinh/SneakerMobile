@@ -1,9 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.Peaksneaker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 
     <style name="Theme.Peaksneaker" parent="Base.Theme.Peaksneaker" />
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomStyle</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomStyle" parent="">
+        <item name="colorSecondaryContainer">@color/nav_orange</item>
+    </style>
+
 </resources>

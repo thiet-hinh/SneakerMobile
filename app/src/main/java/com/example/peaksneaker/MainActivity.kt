@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         val rvFavorites = findViewById<RecyclerView>(R.id.rvFavorites)
         val txtCountFavorite = findViewById<TextView>(R.id.txtCountFavorite)
 
-        // Tạo danh sách dữ liệu mẫu chuẩn theo thiết kế Figma của ní luôn
         val favoriteProducts = listOf(
             FavoriteProduct(1, "YEEZY BOOST 350 V2 'MONO ICE'", "Nike", "$220", "9", "Mono Ice", "#E5CCB4", android.R.drawable.ic_menu_report_image),
             FavoriteProduct(2, "AIR JORDAN 1 RETRO 'HYPE ROYAL'", "Nike", "$180", "10", "Black/Orange", "#2B2B2B", android.R.drawable.ic_menu_report_image),
@@ -51,22 +50,26 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Cập nhật số lượng sản phẩm hiển thị trên text
-        txtCountFavorite.text = "(${favoriteProducts.size} sản phẩm)"
+        txtCountFavorite?.text = "(${favoriteProducts.size} sản phẩm)"
 
         // Đổ dữ liệu vào RecyclerView yêu thích
-        rvFavorites.layoutManager = LinearLayoutManager(this)
-        rvFavorites.adapter = FavoriteAdapter(favoriteProducts)
+        rvFavorites?.layoutManager = LinearLayoutManager(this)
+        rvFavorites?.adapter = FavoriteAdapter(favoriteProducts)
 
         // ==========================================
-        // 3. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH
+        // 3. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH (ĐÃ SỬA ID KHỚP VỚI XML)
         // ==========================================
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val layoutHome = findViewById<View>(R.id.layoutHome)
         val layoutFavorite = findViewById<View>(R.id.layoutFavorite)
 
+        // Thiết lập ban đầu khi vừa vào app: Hiện trang chủ, ẩn trang yêu thích
+        layoutHome.visibility = View.VISIBLE
+        layoutFavorite.visibility = View.GONE
+
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                // Nhớ check ID của item menu trong bottom_nav_menu.xml xem khớp tên không nha ní
                 R.id.nav_home -> {
                     layoutHome.visibility = View.VISIBLE
                     layoutFavorite.visibility = View.GONE
@@ -75,6 +78,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_wishlist -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.VISIBLE
+                    true
+                }
+                R.id.nav_shop, R.id.nav_profile -> {
+                    layoutHome.visibility = View.GONE
+                    layoutFavorite.visibility = View.GONE
                     true
                 }
                 else -> false

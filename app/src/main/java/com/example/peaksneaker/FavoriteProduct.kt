@@ -7,6 +7,6 @@ data class FavoriteProduct(
     val price: String,
     val size: String,
     val colorName: String,
-    val colorHex: String, // Mã màu Hex (Ví dụ: #E5CCB4) để đổi màu dấu chấm tròn
+    val colorHex: String,
     val imageRes: Int
 )
