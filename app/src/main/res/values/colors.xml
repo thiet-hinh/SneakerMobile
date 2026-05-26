@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_app">#09090B</color> <color name="bg_card">#18181B</color> <color name="bg_search">#27272A</color> <color name="orange_main">#FF5722</color> <color name="text_white">#FFFFFF</color>
+    <color name="text_gray">#A1A1AA</color>
+    <color name="tag_hot">#FF3D00</color>
+    <color name="tag_new">#4CAF50</color>
+</resources>
