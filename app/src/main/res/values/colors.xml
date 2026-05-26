@@ -4,4 +4,8 @@
     <color name="text_gray">#A1A1AA</color>
     <color name="tag_hot">#FF3D00</color>
     <color name="tag_new">#4CAF50</color>
+    <color name="nav_bg_dark">#0F0F0F</color>
+    <color name="nav_orange">#FF5E00</color>
+    <color name="nav_gray">#7A7A7A</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -51,22 +51,26 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Cập nhật số lượng sản phẩm hiển thị trên text
-        txtCountFavorite.text = "(${favoriteProducts.size} sản phẩm)"
+        txtCountFavorite?.text = "(${favoriteProducts.size} sản phẩm)"
 
         // Đổ dữ liệu vào RecyclerView yêu thích
-        rvFavorites.layoutManager = LinearLayoutManager(this)
-        rvFavorites.adapter = FavoriteAdapter(favoriteProducts)
+        rvFavorites?.layoutManager = LinearLayoutManager(this)
+        rvFavorites?.adapter = FavoriteAdapter(favoriteProducts)
 
         // ==========================================
-        // 3. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH
+        // 3. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH (ĐÃ SỬA ID KHỚP VỚI XML)
         // ==========================================
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val layoutHome = findViewById<View>(R.id.layoutHome)
         val layoutFavorite = findViewById<View>(R.id.layoutFavorite)
 
+        // Thiết lập ban đầu khi vừa vào app: Hiện trang chủ, ẩn trang yêu thích
+        layoutHome.visibility = View.VISIBLE
+        layoutFavorite.visibility = View.GONE
+
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                // Nhớ check ID của item menu trong bottom_nav_menu.xml xem khớp tên không nha ní
                 R.id.nav_home -> {
                     layoutHome.visibility = View.VISIBLE
                     layoutFavorite.visibility = View.GONE
@@ -75,6 +79,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_wishlist -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.VISIBLE
+                    true
+                }
+                R.id.nav_shop, R.id.nav_profile -> {
+                    // Nếu bấm vào các tab chưa code, ẩn tạm 2 layout chính đi để tránh bị đè giao diện
+                    layoutHome.visibility = View.GONE
+                    layoutFavorite.visibility = View.GONE
                     true
                 }
                 else -> false
