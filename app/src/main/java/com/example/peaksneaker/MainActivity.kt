@@ -1,7 +1,10 @@
 package com.example.peaksneaker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -77,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         )
         rvShopProducts.layoutManager = GridLayoutManager(this, 2)
         rvShopProducts.adapter = ShopProductAdapter(shopProductsData)
+
         // ==========================================
         // 4. SETUP TRANG HỒ SƠ (PROFILE SCREEN)
         // ==========================================
@@ -88,8 +92,41 @@ class MainActivity : AppCompatActivity() {
             Order(3, "AIR MAX '90 OG", "#SV-230516 • Size 8", "⚙ Đang xử lý", "$150", android.R.drawable.ic_menu_report_image, "#1A2533", "#3388FF")
         )
 
-        rvOrderHistory.layoutManager = LinearLayoutManager(this)
-        rvOrderHistory.adapter = OrderAdapter(orderProducts)
+        rvOrderHistory?.layoutManager = LinearLayoutManager(this)
+        rvOrderHistory?.adapter = OrderAdapter(orderProducts)
+
+        // --- BẮT ĐẦU: LOGIC GIAO DIỆN CHƯA ĐĂNG NHẬP / ĐÃ ĐĂNG NHẬP ---
+        val layoutGuestState = findViewById<LinearLayout>(R.id.layoutGuestState)
+        val layoutLoggedState = findViewById<LinearLayout>(R.id.layoutLoggedState)
+
+        // Biến kiểm tra trạng thái đăng nhập (đổi thành true nếu muốn test xem giao diện User)
+        val isUserLoggedIn = false
+
+        if (layoutGuestState != null && layoutLoggedState != null) {
+            if (isUserLoggedIn) {
+                layoutGuestState.visibility = View.GONE
+                layoutLoggedState.visibility = View.VISIBLE
+            } else {
+                layoutGuestState.visibility = View.VISIBLE
+                layoutLoggedState.visibility = View.GONE
+            }
+        }
+
+        // Bắt sự kiện bấm nút "ĐĂNG NHẬP NGAY" để mở LoginActivity
+        val btnGoToLogin = findViewById<Button>(R.id.btnGoToLogin)
+        btnGoToLogin?.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Bắt sự kiện bấm nút "TẠO TÀI KHOẢN MỚI" để mở RegisterActivity
+        val btnGoToRegister = findViewById<Button>(R.id.btnGoToRegister)
+        btnGoToRegister?.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+        // --- KẾT THÚC: LOGIC GIAO DIỆN CHƯA ĐĂNG NHẬP / ĐÃ ĐĂNG NHẬP ---
+
 
         // ==========================================
         // 5. LOGIC DIỀU HƯỚNG CHUYỂN ĐỔI 4 TABS TOÀN DIỆN
