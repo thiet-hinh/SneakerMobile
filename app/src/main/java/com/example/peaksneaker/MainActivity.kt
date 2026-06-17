@@ -54,16 +54,29 @@ class MainActivity : AppCompatActivity() {
         // ==========================================
         // 3. SETUP TRANG CỬA HÀNG (SHOP SCREEN)
         // ==========================================
-        val rvShop = findViewById<RecyclerView>(R.id.rvShopProducts)
-        val shopProducts = listOf(
-            Product(1, "YEEZY BOOST 350 V2", "Adidas", "HOT", android.R.drawable.ic_menu_report_image),
-            Product(2, "AIR JORDAN 1 RETRO", "Nike", "NEW", android.R.drawable.ic_menu_report_image),
-            Product(3, "AIR MAX 90 OG", "Nike", "HOT", android.R.drawable.ic_menu_report_image),
-            Product(4, "NEW BALANCE 990", "New Balance", "NEW", android.R.drawable.ic_menu_report_image)
+        val rvShopCategories = findViewById<RecyclerView>(R.id.rvShopCategories)
+        val shopCategories = listOf(
+            Category(1, "Tất cả", android.R.drawable.ic_menu_compass),
+            Category(2, "Nike", android.R.drawable.ic_menu_gallery),
+            Category(3, "Adidas", android.R.drawable.ic_menu_gallery),
+            Category(4, "Puma", android.R.drawable.ic_menu_gallery),
+            Category(5, "Phụ kiện", android.R.drawable.ic_menu_preferences)
         )
-        rvShop.layoutManager = GridLayoutManager(this, 2)
-        rvShop.adapter = ProductAdapter(shopProducts)
+        rvShopCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvShopCategories.adapter = ShopCategoryAdapter(shopCategories)
 
+        // Setup Lưới sản phẩm
+        val rvShopProducts = findViewById<RecyclerView>(R.id.rvShopProducts)
+        val shopProductsData = listOf(
+            ShopProduct(1, "YEEZY BOOST 350 V2", "ADIDAS", "HOT", "#FF5E00", "$220", android.R.drawable.ic_menu_report_image),
+            ShopProduct(2, "AIR JORDAN 1 RETRO", "NIKE", "HOT", "#FF5E00", "$180", android.R.drawable.ic_menu_report_image),
+            ShopProduct(3, "AIR JORDAN 1 RETRO", "NIKE", "NEW", "#00FF66", "$180", android.R.drawable.ic_menu_report_image),
+            ShopProduct(4, "AIR MAX 90 OG", "NIKE", "HOT", "#FF5E00", "$150", android.R.drawable.ic_menu_report_image),
+            ShopProduct(5, "NIKE SB DUNK", "NIKE", "NEW", "#00FF66", "$220", android.R.drawable.ic_menu_report_image),
+            ShopProduct(6, "NEW BALANCE 990", "NEW BALANCE", "NEW", "#00FF66", "$450", android.R.drawable.ic_menu_report_image)
+        )
+        rvShopProducts.layoutManager = GridLayoutManager(this, 2)
+        rvShopProducts.adapter = ShopProductAdapter(shopProductsData)
         // ==========================================
         // 4. SETUP TRANG HỒ SƠ (PROFILE SCREEN)
         // ==========================================
