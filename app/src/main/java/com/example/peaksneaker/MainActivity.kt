@@ -41,48 +41,65 @@ class MainActivity : AppCompatActivity() {
         // ==========================================
         val rvFavorites = findViewById<RecyclerView>(R.id.rvFavorites)
         val txtCountFavorite = findViewById<TextView>(R.id.txtCountFavorite)
-
         val favoriteProducts = listOf(
             FavoriteProduct(1, "YEEZY BOOST 350 V2 'MONO ICE'", "Nike", "$220", "9", "Mono Ice", "#E5CCB4", android.R.drawable.ic_menu_report_image),
             FavoriteProduct(2, "AIR JORDAN 1 RETRO 'HYPE ROYAL'", "Nike", "$180", "10", "Black/Orange", "#2B2B2B", android.R.drawable.ic_menu_report_image),
             FavoriteProduct(3, "SB DUNK LOW 'PANDORA'", "Nike", "$160", "9", "Pandora", "#7A1E1E", android.R.drawable.ic_menu_report_image),
             FavoriteProduct(4, "AIR JORDAN 4 RETRO 'CEMENT'", "Nike", "$210", "10", "Black/Orange", "#CCCCCC", android.R.drawable.ic_menu_report_image)
         )
-
-        // Cập nhật số lượng sản phẩm hiển thị trên text
         txtCountFavorite?.text = "(${favoriteProducts.size} sản phẩm)"
-
-        // Đổ dữ liệu vào RecyclerView yêu thích
         rvFavorites?.layoutManager = LinearLayoutManager(this)
         rvFavorites?.adapter = FavoriteAdapter(favoriteProducts)
 
         // ==========================================
-        // 3. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH (ĐÃ SỬA ID KHỚP VỚI XML)
+        // 3. SETUP TRANG CỬA HÀNG (SHOP SCREEN)
         // ==========================================
+        val rvShop = findViewById<RecyclerView>(R.id.rvShopProducts)
+        val shopProducts = listOf(
+            Product(1, "YEEZY BOOST 350 V2", "Adidas", "HOT", android.R.drawable.ic_menu_report_image),
+            Product(2, "AIR JORDAN 1 RETRO", "Nike", "NEW", android.R.drawable.ic_menu_report_image),
+            Product(3, "AIR MAX 90 OG", "Nike", "HOT", android.R.drawable.ic_menu_report_image),
+            Product(4, "NEW BALANCE 990", "New Balance", "NEW", android.R.drawable.ic_menu_report_image)
+        )
+        rvShop.layoutManager = GridLayoutManager(this, 2)
+        rvShop.adapter = ProductAdapter(shopProducts)
 
+        // ==========================================
+        // 4. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH
+        // ==========================================
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val layoutHome = findViewById<View>(R.id.layoutHome)
         val layoutFavorite = findViewById<View>(R.id.layoutFavorite)
-
-        // Thiết lập ban đầu khi vừa vào app: Hiện trang chủ, ẩn trang yêu thích
+        val layoutShop = findViewById<View>(R.id.layoutShop)
+        // Trạng thái ban đầu
         layoutHome.visibility = View.VISIBLE
         layoutFavorite.visibility = View.GONE
+        layoutShop.visibility = View.GONE
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
                     layoutHome.visibility = View.VISIBLE
                     layoutFavorite.visibility = View.GONE
+                    layoutShop.visibility = View.GONE
+                    true
+                }
+                R.id.nav_shop -> {
+                    layoutHome.visibility = View.GONE
+                    layoutFavorite.visibility = View.GONE
+                    layoutShop.visibility = View.VISIBLE
                     true
                 }
                 R.id.nav_wishlist -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.VISIBLE
+                    layoutShop.visibility = View.GONE
                     true
                 }
-                R.id.nav_shop, R.id.nav_profile -> {
+                R.id.nav_profile -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.GONE
+                    layoutShop.visibility = View.GONE
                     true
                 }
                 else -> false
