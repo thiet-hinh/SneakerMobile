@@ -65,6 +65,7 @@
             android:textSize="14sp" />
 
         <LinearLayout
+            android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
@@ -79,11 +80,14 @@
                 android:src="@android:drawable/ic_search_category_default" />
 
             <EditText
+                android:id="@+id/edtSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="8dp"
                 android:background="@null"
+                android:focusable="false"
+                android:clickable="true"
                 android:hint="Tìm kiếm giày sneaker, thương hiệu..."
                 android:textColor="@android:color/white"
                 android:textColorHint="#888888"
@@ -91,6 +95,7 @@
                 android:inputType="text" />
 
             <Button
+                android:id="@+id/btnSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:background="@drawable/bg_orange_button"
