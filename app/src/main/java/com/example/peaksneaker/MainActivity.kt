@@ -65,16 +65,33 @@ class MainActivity : AppCompatActivity() {
         rvShop.adapter = ProductAdapter(shopProducts)
 
         // ==========================================
-        // 4. LOGIC CHUYỂN ĐỔI ẨN / HIỆN MÀN HÌNH
+        // 4. SETUP TRANG HỒ SƠ (PROFILE SCREEN)
+        // ==========================================
+        val rvOrderHistory = findViewById<RecyclerView>(R.id.rvOrderHistory)
+
+        val orderProducts = listOf(
+            Order(1, "YEEZY BOOST 350 V2", "#SV-230520 • Size 9", "✓ Đã giao", "$220", android.R.drawable.ic_menu_report_image, "#152B1E", "#00FF66"),
+            Order(2, "AIR JORDAN 1 RETRO", "#SV-230518 • Size 10", "🕒 Đang giao", "$180", android.R.drawable.ic_menu_report_image, "#331919", "#FF5E00"),
+            Order(3, "AIR MAX '90 OG", "#SV-230516 • Size 8", "⚙ Đang xử lý", "$150", android.R.drawable.ic_menu_report_image, "#1A2533", "#3388FF")
+        )
+
+        rvOrderHistory.layoutManager = LinearLayoutManager(this)
+        rvOrderHistory.adapter = OrderAdapter(orderProducts)
+
+        // ==========================================
+        // 5. LOGIC DIỀU HƯỚNG CHUYỂN ĐỔI 4 TABS TOÀN DIỆN
         // ==========================================
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val layoutHome = findViewById<View>(R.id.layoutHome)
         val layoutFavorite = findViewById<View>(R.id.layoutFavorite)
         val layoutShop = findViewById<View>(R.id.layoutShop)
-        // Trạng thái ban đầu
+        val layoutProfile = findViewById<View>(R.id.layoutProfile)
+
+        // Trạng thái hiển thị ban đầu khi mở ứng dụng
         layoutHome.visibility = View.VISIBLE
         layoutFavorite.visibility = View.GONE
         layoutShop.visibility = View.GONE
+        layoutProfile.visibility = View.GONE
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -82,24 +99,28 @@ class MainActivity : AppCompatActivity() {
                     layoutHome.visibility = View.VISIBLE
                     layoutFavorite.visibility = View.GONE
                     layoutShop.visibility = View.GONE
+                    layoutProfile.visibility = View.GONE
                     true
                 }
                 R.id.nav_shop -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.GONE
                     layoutShop.visibility = View.VISIBLE
+                    layoutProfile.visibility = View.GONE
                     true
                 }
                 R.id.nav_wishlist -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.VISIBLE
                     layoutShop.visibility = View.GONE
+                    layoutProfile.visibility = View.GONE
                     true
                 }
                 R.id.nav_profile -> {
                     layoutHome.visibility = View.GONE
                     layoutFavorite.visibility = View.GONE
                     layoutShop.visibility = View.GONE
+                    layoutProfile.visibility = View.VISIBLE
                     true
                 }
                 else -> false
